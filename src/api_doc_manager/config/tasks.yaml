@@ -1,0 +1,10 @@
+api_doc_manager_task:
+  description: >
+    제공된 소스 코드를 분석하여 API 문서를 작성하세요.
+    소스 코드:
+    {source_code_content}
+  expected_output: >
+    제공된 소스 코드와 API 명세서를 바탕으로 작성된 완벽한 API 문서입니다. (반드시 한국어로 작성하세요)
+  agent: api_doc_manager
+  output_file: api_doc.md
+
