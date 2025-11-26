@@ -21,11 +21,9 @@ jobs:
 
       - name: Call Lambda Function URL
         run: |
-
           aws lambda invoke \
             --function-name ${{ secrets.AWS_LAMBDA_NAME }} \
-            --invocation-type RequestResponse \
-            --body '{"commit_hash": "${{ github.sha }}"}' \
+            --payload '{"commit_hash": "${{ github.sha }}"}' \
             response.json
 
           echo "Lambda response:"
