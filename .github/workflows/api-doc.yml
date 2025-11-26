@@ -22,10 +22,9 @@ jobs:
       - name: Call Lambda Function URL
         run: |
 
-          aws lambda invoke-url \
-            --region ap-northeast-2 \
-            --function-url ${{ secrets.AWS_LAMBDA_URL }} \
-            --method POST \
+          aws lambda invoke \
+            --function-name ${{ secrets.AWS_LAMBDA_NAME }} \
+            --invocation-type RequestResponse \
             --body '{"commit_hash": "${{ github.sha }}"}' \
             response.json
 
