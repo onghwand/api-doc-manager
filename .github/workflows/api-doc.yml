@@ -23,6 +23,7 @@ jobs:
         run: |
           aws lambda invoke \
             --function-name ${{ secrets.AWS_LAMBDA_NAME }} \
+            --cli-binary-format raw-in-base64-out \
             --payload '{"commit_hash": "${{ github.sha }}"}' \
             response.json
 
