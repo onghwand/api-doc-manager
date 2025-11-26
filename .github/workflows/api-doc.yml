@@ -1,0 +1,33 @@
+name: Deploy on Merge
+
+on:
+  pull_request:
+    types:
+      - closed
+    branches:
+      - main
+
+jobs:
+  trigger-endpoint:
+    if: github.event.pull_request.merged == true && github.event.pull_request.head.ref == 'dev'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Configure AWS Credentials
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: ap-northeast-2
+
+      - name: Call Lambda Function URL
+        run: |
+
+          aws lambda invoke-url \
+            --region ap-northeast-2 \
+            --function-url ${{ secrets.AWS_LAMBDA_URL }} \
+            --method POST \
+            --body '{"commit_hash": "${{ github.sha }}"}' \
+            response.json
+
+          echo "Lambda response:"
+          cat response.json
