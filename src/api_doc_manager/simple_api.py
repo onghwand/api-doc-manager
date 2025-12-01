@@ -15,3 +15,11 @@ def read_root(param3: str, param4: str):
     Simple API that accepts one parameter and returns 'hello'.
     """
     return "test1"
+
+@app.get("/abc")
+def read_root(param5: str, param6: str):
+    """
+    Simple API that accepts one parameter and returns 'hello'.
+    """
+    return "abc1"
+
